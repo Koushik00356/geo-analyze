@@ -1,0 +1,147 @@
+{
+  "_comment": "Evidence -> location knowledge base. 'distinctiveness' = how strongly this signal alone narrows location (0-1). 'candidates' = where it points, with per-candidate weight. region=null means the signal pins a country but not a sub-region. Extend with 'objects' and 'brands' sections later; the engine reads them the same way.",
+
+  "scripts": {
+    "Latin":      { "distinctiveness": 0.03, "candidates": [] },
+
+    "Telugu":     { "distinctiveness": 0.90, "candidates": [
+      { "country": "India", "region": "Telangana",      "weight": 1.0 },
+      { "country": "India", "region": "Andhra Pradesh", "weight": 1.0 }
+    ]},
+    "Tamil":      { "distinctiveness": 0.90, "candidates": [
+      { "country": "India",     "region": "Tamil Nadu",  "weight": 1.0 },
+      { "country": "India",     "region": "Puducherry",  "weight": 0.3 },
+      { "country": "Sri Lanka", "region": null,          "weight": 0.4 }
+    ]},
+    "Kannada":    { "distinctiveness": 0.90, "candidates": [
+      { "country": "India", "region": "Karnataka", "weight": 1.0 }
+    ]},
+    "Malayalam":  { "distinctiveness": 0.92, "candidates": [
+      { "country": "India", "region": "Kerala", "weight": 1.0 }
+    ]},
+    "Gujarati":   { "distinctiveness": 0.88, "candidates": [
+      { "country": "India", "region": "Gujarat", "weight": 1.0 }
+    ]},
+    "Gurmukhi":   { "distinctiveness": 0.85, "candidates": [
+      { "country": "India", "region": "Punjab", "weight": 1.0 }
+    ]},
+    "Oriya":      { "distinctiveness": 0.88, "candidates": [
+      { "country": "India", "region": "Odisha", "weight": 1.0 }
+    ]},
+    "Bengali":    { "distinctiveness": 0.75, "candidates": [
+      { "country": "India",      "region": "West Bengal", "weight": 1.0 },
+      { "country": "India",      "region": "Tripura",     "weight": 0.3 },
+      { "country": "Bangladesh", "region": null,          "weight": 0.9 }
+    ]},
+    "Devanagari": { "distinctiveness": 0.55, "candidates": [
+      { "country": "India", "region": null, "weight": 1.0 },
+      { "country": "Nepal", "region": null, "weight": 0.5 }
+    ]},
+
+    "Sinhala":    { "distinctiveness": 0.95, "candidates": [
+      { "country": "Sri Lanka", "region": null, "weight": 1.0 }
+    ]},
+    "Thai":       { "distinctiveness": 0.95, "candidates": [
+      { "country": "Thailand", "region": null, "weight": 1.0 }
+    ]},
+    "Hangul":     { "distinctiveness": 0.90, "candidates": [
+      { "country": "South Korea", "region": null, "weight": 1.0 },
+      { "country": "North Korea", "region": null, "weight": 0.2 }
+    ]},
+    "Hiragana":   { "distinctiveness": 0.95, "candidates": [
+      { "country": "Japan", "region": null, "weight": 1.0 }
+    ]},
+    "Katakana":   { "distinctiveness": 0.95, "candidates": [
+      { "country": "Japan", "region": null, "weight": 1.0 }
+    ]},
+    "Han":        { "distinctiveness": 0.50, "candidates": [
+      { "country": "China",     "region": null, "weight": 0.7 },
+      { "country": "Japan",     "region": null, "weight": 0.4 },
+      { "country": "Taiwan",    "region": null, "weight": 0.4 },
+      { "country": "Singapore", "region": null, "weight": 0.2 }
+    ]},
+    "Greek":      { "distinctiveness": 0.85, "candidates": [
+      { "country": "Greece", "region": null, "weight": 1.0 },
+      { "country": "Cyprus", "region": null, "weight": 0.3 }
+    ]},
+    "Hebrew":     { "distinctiveness": 0.90, "candidates": [
+      { "country": "Israel", "region": null, "weight": 1.0 }
+    ]},
+    "Cyrillic":   { "distinctiveness": 0.45, "candidates": [
+      { "country": "Russia",  "region": null, "weight": 0.6 },
+      { "country": "Ukraine", "region": null, "weight": 0.2 }
+    ]},
+    "Arabic":     { "distinctiveness": 0.30, "candidates": [
+      { "country": "Saudi Arabia", "region": null, "weight": 0.3 },
+      { "country": "UAE",          "region": null, "weight": 0.3 },
+      { "country": "Egypt",        "region": null, "weight": 0.3 }
+    ]}
+  },
+
+  "_objects_note": "Stock YOLOv8 (COCO) classes like car/person/chair carry almost no country-level signal, so they are intentionally NOT mapped here - the reasoning engine simply ignores unmapped classes. The entries below are forward-looking: they only fire once a CUSTOM-trained model can emit these region-specific classes. Until then the detector's real value is the object inventory, not location.",
+
+  "objects": {
+    "auto_rickshaw": { "distinctiveness": 0.60, "candidates": [
+      { "country": "India",      "region": null, "weight": 1.0 },
+      { "country": "Bangladesh", "region": null, "weight": 0.5 },
+      { "country": "Pakistan",   "region": null, "weight": 0.4 },
+      { "country": "Sri Lanka",  "region": null, "weight": 0.4 },
+      { "country": "Thailand",   "region": null, "weight": 0.3 }
+    ]},
+    "indian_number_plate": { "distinctiveness": 0.85, "candidates": [
+      { "country": "India", "region": null, "weight": 1.0 }
+    ]},
+    "yellow_black_taxi": { "distinctiveness": 0.30, "candidates": [
+      { "country": "India", "region": "Maharashtra", "weight": 0.5 },
+      { "country": "India", "region": "West Bengal",  "weight": 0.5 }
+    ]}
+  },
+
+  "_places_note": "Place names are highly discriminating, so distinctiveness is high. A 'city' field on a candidate drives the city-level prediction. OCR is noisy, so entities.py fuzzy-matches against these keys rather than requiring exact spelling.",
+
+  "places": {
+    "Hyderabad":     { "distinctiveness": 0.93, "candidates": [ { "country": "India", "region": "Telangana",      "city": "Hyderabad",     "weight": 1.0 } ]},
+    "Secunderabad":  { "distinctiveness": 0.93, "candidates": [ { "country": "India", "region": "Telangana",      "city": "Hyderabad",     "weight": 1.0 } ]},
+    "Warangal":      { "distinctiveness": 0.92, "candidates": [ { "country": "India", "region": "Telangana",      "city": "Warangal",      "weight": 1.0 } ]},
+    "Vijayawada":    { "distinctiveness": 0.92, "candidates": [ { "country": "India", "region": "Andhra Pradesh", "city": "Vijayawada",    "weight": 1.0 } ]},
+    "Visakhapatnam": { "distinctiveness": 0.93, "candidates": [ { "country": "India", "region": "Andhra Pradesh", "city": "Visakhapatnam", "weight": 1.0 } ]},
+    "Bengaluru":     { "distinctiveness": 0.93, "candidates": [ { "country": "India", "region": "Karnataka",      "city": "Bengaluru",     "weight": 1.0 } ]},
+    "Bangalore":     { "distinctiveness": 0.93, "candidates": [ { "country": "India", "region": "Karnataka",      "city": "Bengaluru",     "weight": 1.0 } ]},
+    "Chennai":       { "distinctiveness": 0.93, "candidates": [ { "country": "India", "region": "Tamil Nadu",     "city": "Chennai",       "weight": 1.0 } ]},
+    "Mumbai":        { "distinctiveness": 0.93, "candidates": [ { "country": "India", "region": "Maharashtra",    "city": "Mumbai",        "weight": 1.0 } ]},
+    "Pune":          { "distinctiveness": 0.92, "candidates": [ { "country": "India", "region": "Maharashtra",    "city": "Pune",          "weight": 1.0 } ]},
+    "Kolkata":       { "distinctiveness": 0.93, "candidates": [ { "country": "India", "region": "West Bengal",    "city": "Kolkata",       "weight": 1.0 } ]},
+    "New Delhi":     { "distinctiveness": 0.90, "candidates": [ { "country": "India", "region": "Delhi",          "city": "New Delhi",     "weight": 1.0 } ]},
+    "Telangana":      { "distinctiveness": 0.90, "candidates": [ { "country": "India", "region": "Telangana",      "weight": 1.0 } ]},
+    "Andhra Pradesh": { "distinctiveness": 0.90, "candidates": [ { "country": "India", "region": "Andhra Pradesh", "weight": 1.0 } ]},
+    "Tokyo":         { "distinctiveness": 0.93, "candidates": [ { "country": "Japan", "region": null, "city": "Tokyo",  "weight": 1.0 } ]},
+    "Dubai":         { "distinctiveness": 0.92, "candidates": [ { "country": "UAE",   "region": null, "city": "Dubai",  "weight": 1.0 } ]}
+  },
+
+  "_plate_codes_note": "Indian vehicle registration codes - the first two letters encode the state. Near-definitive for the region when readable.",
+
+  "plate_codes": {
+    "TS": { "distinctiveness": 0.95, "candidates": [ { "country": "India", "region": "Telangana",      "weight": 1.0 } ]},
+    "TG": { "distinctiveness": 0.95, "candidates": [ { "country": "India", "region": "Telangana",      "weight": 1.0 } ]},
+    "AP": { "distinctiveness": 0.95, "candidates": [ { "country": "India", "region": "Andhra Pradesh", "weight": 1.0 } ]},
+    "KA": { "distinctiveness": 0.95, "candidates": [ { "country": "India", "region": "Karnataka",      "weight": 1.0 } ]},
+    "TN": { "distinctiveness": 0.95, "candidates": [ { "country": "India", "region": "Tamil Nadu",     "weight": 1.0 } ]},
+    "MH": { "distinctiveness": 0.95, "candidates": [ { "country": "India", "region": "Maharashtra",    "weight": 1.0 } ]},
+    "KL": { "distinctiveness": 0.95, "candidates": [ { "country": "India", "region": "Kerala",         "weight": 1.0 } ]},
+    "WB": { "distinctiveness": 0.95, "candidates": [ { "country": "India", "region": "West Bengal",    "weight": 1.0 } ]},
+    "DL": { "distinctiveness": 0.95, "candidates": [ { "country": "India", "region": "Delhi",          "weight": 1.0 } ]}
+  },
+
+  "_patterns_note": "Format signals found by regex. INR/Rs is shared across South Asia (lower distinctiveness); a +91 phone is strongly India; a bare 6-digit PIN is weak because many numbers look like that.",
+
+  "patterns": {
+    "inr_currency":   { "distinctiveness": 0.55, "candidates": [
+      { "country": "India",     "region": null, "weight": 1.0 },
+      { "country": "Pakistan",  "region": null, "weight": 0.5 },
+      { "country": "Nepal",     "region": null, "weight": 0.4 },
+      { "country": "Sri Lanka", "region": null, "weight": 0.4 }
+    ]},
+    "indian_phone":   { "distinctiveness": 0.85, "candidates": [ { "country": "India", "region": null, "weight": 1.0 } ]},
+    "indian_pincode": { "distinctiveness": 0.30, "candidates": [ { "country": "India", "region": null, "weight": 1.0 } ]}
+  }
+}

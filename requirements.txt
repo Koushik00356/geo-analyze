@@ -1,0 +1,10 @@
+torch
+torchvision
+transformers
+opencv-python
+pillow
+numpy
+easyocr
+ultralytics
+rich
+typer

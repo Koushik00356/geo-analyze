@@ -1,0 +1,5 @@
+geo_env/
+__pycache__/
+*.pt
+*.pth
+*.onnx
