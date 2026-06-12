@@ -19,10 +19,11 @@ the reasoning engine with zero changes there.
 Quick test:
     python core/detector.py images/test.jpg
     python core/detector.py images/test.jpg --model yolov8s.pt --min-conf 0.4
-"""
+
 
 from __future__ import annotations
-
+"""
+from __future__ import annotations
 import os
 from collections import Counter
 from dataclasses import dataclass
